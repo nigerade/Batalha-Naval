@@ -10,3 +10,5 @@ O programa utiliza Matrizes, Laços de Repetição, Arrays, Condicionais e Funç
 O jogo é jogado com os Navios estando apenas na Horizontal para facilitar a Programação.
 
 Projeto mais Completo e Complexo desenvolvido em Linguagem C durante o meu Curso.
+
+![alt text](IMG.png)
