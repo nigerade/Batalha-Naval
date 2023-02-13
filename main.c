@@ -63,6 +63,7 @@ int main() // COMEÇO PROGRAMA
     // FIM ENTRADA DOS NAVIOS NO TABULEIRO DO HUMANO
 
 
+
 	// SORTEIO DOS NAVIOS NO TABULEIRO DO COMPUTADOR
 	for(i=1; i<=6; i++) //Sao 6 navios
 	{	
@@ -78,32 +79,38 @@ int main() // COMEÇO PROGRAMA
     // FIM SORTEIO DOS NAVIOS NO TABULEIRO DO COMPUTADOR
 
 
+
     // LOOP QUE FAZ O JOGO CONTINUAR ENQUANTO NÃO ATINGIR 18 PONTOS (TODOS NAVIOS)
 	while(pontosHumano<18 && pontosComputador<18)
-	{	//Tiro do Humano
+	{	// Tiro do Humano
 		do
 		 {	
             printf("Entre com as coordenadas de linha e coluna do tiro:\n");
 		    scanf("%d%d", &l, &c);
+
 		    if  (tabuleiroComputador [l][c] == TIRONAVIO || tabuleiroComputador [l][c] ==TIRONAGUA)
     		{  
-    		    printf("Você já atirou nesta posição!!\n");
+    		    printf("Você já atirou nesta posição!!\n"); // Não deixa Atirar no mesmo Lugar
     		}  
-		} while  (tabuleiroComputador [l][c] == TIRONAVIO || tabuleiroComputador [l][c] ==TIRONAGUA);  
+        
+		} while  (tabuleiroComputador [l][c] == TIRONAVIO || tabuleiroComputador [l][c] ==TIRONAGUA);
+                  // Se o Humano errar preenche com Água, caso contrário, preenche com Acerto
 
-		if(tabuleiroComputador[l][c] == AGUA)
+
+		if(tabuleiroComputador[l][c] == AGUA) // Se o computador errar preenche com Água 
 		{	
 		    printf("Errou!!\n");
 		    tabuleiroComputador[l][c] = TIRONAGUA;
 		}
 
-		else if (tabuleiroComputador[l][c] == NAVIO)
+		else if (tabuleiroComputador[l][c] == NAVIO) // Se o computador errar preenche com Acerto
 		{  
              pontosHumano++;
 		    printf("Acertou!!\n");
 		    tabuleiroComputador[l][c] = TIRONAVIO;   
 		}
 	
+
 		//Tiro do Computador
 		if (modoComputador ==  ALEATORIO)
 		{ 
