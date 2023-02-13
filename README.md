@@ -7,4 +7,6 @@ O nível de Dificuldade é Alto, pois o Computador está programado para quando 
 
 O programa utiliza Matrizes, Laços de Repetição, Arrays, Condicionais e Função #define em C.
 
+O jogo é jogado com os Navios estando apenas na Horizontal para facilitar a Programação.
+
 Projeto mais Completo e Complexo desenvolvido em Linguagem C durante o meu Curso.

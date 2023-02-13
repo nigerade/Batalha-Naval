@@ -17,10 +17,14 @@
 #define ESQUERDA 04
 // FIM DEFININDO  VARIÁVEIS
 
+
+
 int main() // COMEÇO PROGRAMA 
 {	
     srand(time(NULL)); // TEMPO INDEFINIDO PARA ENCERRAR O PROGRAMA
 	setlocale(LC_ALL, "Portuguese"); // PORTUGUÊS COMO LINGUAGEM PRINCIPAL
+
+
 
     // DECLARANDO VARIÁVEIS
 	int tabuleiroHumano[10][10];
@@ -34,6 +38,7 @@ int main() // COMEÇO PROGRAMA
     // FIM DECLARANDO VARIÁVEIS
 
 	
+
 	// PREENCHENDO AS MATRIZES COM ÁGUA
 	for(l=0; l<10; l++)
 	{	
@@ -44,6 +49,7 @@ int main() // COMEÇO PROGRAMA
 		}
 	}
     // FIM PREENCHENDO AS MATRIZES COM ÁGUA
+
 
 	
 	// ENTRADA DOS NAVIOS NO TABULEIRO DO HUMANO
@@ -61,6 +67,7 @@ int main() // COMEÇO PROGRAMA
 		tabuleiroHumano[l][c+2] = NAVIO;
      }
     // FIM ENTRADA DOS NAVIOS NO TABULEIRO DO HUMANO
+
 
 
 
@@ -97,32 +104,40 @@ int main() // COMEÇO PROGRAMA
                   // Se o Humano errar preenche com Água, caso contrário, preenche com Acerto
 
 
-		if(tabuleiroComputador[l][c] == AGUA) // Se o computador errar preenche com Água 
+		if(tabuleiroComputador[l][c] == AGUA) // Se o Humano errar, preenche com Água
 		{	
-		    printf("Errou!!\n");
+		    printf("Errou!!\n"); // Sem Pontos para o Humano!!
 		    tabuleiroComputador[l][c] = TIRONAGUA;
 		}
 
-		else if (tabuleiroComputador[l][c] == NAVIO) // Se o computador errar preenche com Acerto
+		else if (tabuleiroComputador[l][c] == NAVIO) // Se o Humano Acertar, preenche com Acerto e ganha 1 Ponto
 		{  
-             pontosHumano++;
+             pontosHumano++; // Pontos para o Humano!! 
 		    printf("Acertou!!\n");
 		    tabuleiroComputador[l][c] = TIRONAVIO;   
 		}
 	
 
+
 		//Tiro do Computador
 		if (modoComputador ==  ALEATORIO)
 		{ 
     		do{
-    		    l = rand()%10;
-    		    c = rand()%10;
-    		} while(tabuleiroHumano [l][c] == TIRONAVIO || tabuleiroHumano [l][c] ==TIRONAGUA);
+    		    l = rand()%10; // Chuta um lugar para Atirar na matriz 10x10 - LINHA
+    		    c = rand()%10; // Chuta um lugar para Atirar na matriz 10x10 - COLUNA 
+    		} 
+            
+            while(tabuleiroHumano [l][c] == TIRONAVIO || tabuleiroHumano [l][c] ==TIRONAGUA); 
+                  // Continua o Loop até satisfazer uma das condições
 		}  
+        // Enquanto o Computador não Acertar continua no Modo Aleatório
 
-	   else // modointeligente
+
+
+
+	   else // Ativa o modointeligente se Acertar
 	   {
-	      l = ultimoL;
+	      l = ultimoL; // Guarda onde Acertou
 	      if (sentido == DIREITA)  c = ultimoC+1;
 	      if (sentido == ESQUERDA) c = ultimoC-1;
 	   }
@@ -130,30 +145,31 @@ int main() // COMEÇO PROGRAMA
 		printf("Eu estou atirando nas coordenadas %d, %d\n", l, c);
 	    if(tabuleiroHumano[l][c] == AGUA)
 	    {   
-            if(contTiros > 0)
+            if(contTiros > 0) // Se para a Direita não Tem mais onde acertar e não acertou 3 ainda, volta para a esquerda do Primeiro
     	    {  
-                 sentido = ESQUERDA;
+                 sentido = ESQUERDA; // Volta a Esquerda do Primeiro Acerto
     	        ultimoC = c  - contTiros;
     	    }
-		    printf("Errei!!\n");
+
+		    printf("Errei!!\n"); // Computador
 		    tabuleiroHumano[l][c] = TIRONAGUA;
 		}
 
-		else if(tabuleiroHumano[l][c] == NAVIO)
+		else if(tabuleiroHumano[l][c] == NAVIO) // Computador Acerta
 		{   
-            pontosComputador++;
-		    contTiros ++;
-		    tabuleiroHumano[l][c] = TIRONAVIO;
+            pontosComputador++; // Computador ganha 1 Ponto
+		    contTiros ++; // Continua enquanto não acertar as 3 Partes do Navio
+		    tabuleiroHumano[l][c] = TIRONAVIO; // Se Acertar
 		    printf("Acertei!!\n");
-		    ultimoL = l;
-		    ultimoC = c;
-		    modoComputador = INTELIGENTE;
+		    ultimoL = l; // Computador Não atira no Mesmo Lugar - LINHA
+		    ultimoC = c; // Computador Não atira no Mesmo Lugar - COMPUTADOR
+		    modoComputador = INTELIGENTE; // Ativa o Modo Inteligente 
 
-		    if (contTiros == 3)
+		    if (contTiros == 3) // Se Acertar todas partes do Navio
 		    {   
-                modoComputador = ALEATORIO;
+                modoComputador = ALEATORIO; // Volta ao Modo Aleatório
 		        contTiros = 0;
-		        sentido = DIREITA;
+		        sentido = DIREITA; // Continua para a Direita
 		    }
 		}  
 		
